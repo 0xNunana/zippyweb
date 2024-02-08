@@ -2,7 +2,7 @@
 import HistoryWrapper from '@/app/components/HistoryWrapper';
 import OrderHistory from '@/app/components/OrderHistory';
 import TrackWrapper from '@/app/components/TrackWrapper';
-import Image from 'next/image';
+
 import { Suspense } from 'react';
 
 export default function Page() {

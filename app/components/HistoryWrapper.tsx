@@ -9,7 +9,7 @@ const HistoryWrapper = () => {
 
   const {data}=useData()
   const [searchData, setSearchData] = useState<OrdersType | null>(null);
-  const [error,setError]=useState('')
+
   useEffect(() => {
     const fetchData = async () => {
       if (data?.accessToken) { // Fetch data only if accessToken is present
