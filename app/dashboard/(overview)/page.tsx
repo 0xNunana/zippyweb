@@ -1,7 +1,9 @@
 
 import HistoryWrapper from '@/app/components/HistoryWrapper';
+import HistoryWrapperSkel from '@/app/components/HistoryWrapperSkel';
 import OrderHistory from '@/app/components/OrderHistory';
 import TrackWrapper from '@/app/components/TrackWrapper';
+
 
 import { Suspense } from 'react';
 
@@ -12,12 +14,12 @@ export default function Page() {
      <div className='flex-grow'>
      <div className="">
       
-      <Suspense fallback={<div>Card skeletons</div>}>
+   
         <TrackWrapper/>
-      </Suspense>
+   
     </div>
     <div className="">
-      <Suspense fallback={<div>RevenueChartSkeleton</div>}>
+      <Suspense fallback={<HistoryWrapperSkel/>}>
       <HistoryWrapper/>
       </Suspense>
       

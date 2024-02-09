@@ -105,7 +105,7 @@ const HistoryWrapper = () => {
 
        <div>
        <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M8.91 20.42L15.43 13.9C16.2 13.13 16.2 11.87 15.43 11.1L8.91 4.58" stroke="#4CA7A8" strokeWidth="1.5" stroke-miterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+<path d="M8.91 20.42L15.43 13.9C16.2 13.13 16.2 11.87 15.43 11.1L8.91 4.58" stroke="#4CA7A8" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
 </svg>
 
        </div>
