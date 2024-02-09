@@ -4,17 +4,14 @@ import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import { UserType, url } from '../lib/definitions';
 import { useData } from '@/DataContext';
-import { useRouter } from 'next/navigation';
+
 
 const Accountbar = () => {
-  const router = useRouter()
+
   const { data } = useData();
   const accessToken = data?.accessToken;
   const [user, setUser] = useState<UserType | null>(null);
-  if(!data?.accessToken)(
-    router.replace('/')
-  )
-
+ 
   useEffect(() => {
     const fetchUserInfo = async () => {
       try {
