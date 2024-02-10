@@ -24,6 +24,12 @@ npm install
 
 ### Usage
 ### To start the Nextjs development server and run the app, use the following command:
+Add a .env.local file with a generated secret
+
+You can type in your terminal `openssl rand -hex 32` or go to https://generate-secret.now.sh/32
+
+copy the string and assign it to AUTH_SECRET='...' in the .env.local file
+
 ```bash
 npm run dev
 ```
