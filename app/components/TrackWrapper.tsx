@@ -4,13 +4,16 @@ import React,{useState} from 'react'
 import Image from 'next/image'
 import { useData } from '@/DataContext'
 import { OrdersDetailType } from '../lib/definitions'
+import { useSession } from 'next-auth/react';
 
 
 
 const TrackWrapper = () => {
 
+  const {data:session}=useSession()
 
-  const {data}=useData()
+  const accessToken = session?.user?.accessToken
+
   const [error, setError] = useState('');
   const [orderId, setOrderId] = useState('');
   const [searchdata, setsearchData] = useState<OrdersDetailType | null>(null);
@@ -18,7 +21,7 @@ const TrackWrapper = () => {
  
   const handleSearch = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-console.log(data?.accessToken)
+
     try {
       if (!orderId.trim()) {
         setError('Please enter a tracking number');
@@ -30,7 +33,7 @@ console.log(data?.accessToken)
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${data?.accessToken}` 
+          'Authorization': `Bearer ${accessToken}` 
         },
       });
 

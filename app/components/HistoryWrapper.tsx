@@ -1,23 +1,24 @@
 'use client'
 
 import React, { useEffect,useState } from 'react'
-import { useData } from '@/DataContext'
-import { OrdersType } from '../lib/definitions'
 
+import { OrdersType } from '../lib/definitions'
+import { useSession } from 'next-auth/react';
 
 const HistoryWrapper = () => {
+  const {data:session}=useSession()
 
-  const {data}=useData()
+  const accessToken = session?.user?.accessToken
   const [searchData, setSearchData] = useState<OrdersType | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
-      if (data?.accessToken) { // Fetch data only if accessToken is present
+      if (accessToken) { // Fetch data only if accessToken is present
         try {
           const response = await fetch('https://coding.zippy.com.gh/api/get_orders', {
             headers: {
               'Content-Type': 'application/json',
-              'Authorization': `Bearer ${data.accessToken}`
+              'Authorization': `Bearer ${accessToken}`
             }
           });
     
@@ -37,7 +38,7 @@ const HistoryWrapper = () => {
     };
     
     fetchData(); // Call the async function immediately
-  }, [data]); // Empty dependency array means this effect runs only once on mount
+  }, [accessToken]); // Empty dependency array means this effect runs only once on mount
   
 
 

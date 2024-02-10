@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import NavLinks from './NavLinks';
 import Image from 'next/image';
+import { signOut } from '@/auth';
 
 export default function SideNav() {
   return (
@@ -35,7 +36,7 @@ export default function SideNav() {
         <form action={
           async()=>{
             'use server'
-            // await signOut()
+            await signOut()
           }
         }>
           <button className="flex h-[48px] grow items-center justify-center gap-2 rounded-md p-3 text-sm font-medium text-[#BD2F51]  hover:text-red-800 md:flex-none md:justify-start md:p-2 md:px-3">

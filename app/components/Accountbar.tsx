@@ -1,16 +1,19 @@
 'use client'
 
-import Image from 'next/image';
+
 import React, { useEffect, useState } from 'react';
 import { UserType, url } from '../lib/definitions';
-import { useData } from '@/DataContext';
 import Link from 'next/link';
+import { useSession } from 'next-auth/react';
+
+
 
 
 const Accountbar = () => {
+  const {data:session}=useSession()
 
-  const { data } = useData();
-  const accessToken = data?.accessToken;
+  const accessToken = session?.user?.accessToken
+
   const [user, setUser] = useState<UserType | null>(null);
  
   useEffect(() => {
@@ -41,7 +44,7 @@ const Accountbar = () => {
   return (
     <div className='p-[32px]'>
       <div className='flex items-center'>
-        {data?.accessToken ? (
+        {session?.user ? (
  <div className='flex flex-grow '>
  <div className='space-y-[6px] text-[16px]'>
    <p className='font-medium'>Hi {user?.data.name},</p>

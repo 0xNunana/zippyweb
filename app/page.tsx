@@ -1,40 +1,20 @@
 'use client'
-
 import Image from "next/image";
-import { useState } from "react";
-import { useData } from "@/DataContext";
-import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 
 export default function Example() {
-  const router = useRouter();
-  const { setData } = useData();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    try {
-      const response = await fetch('https://coding.zippy.com.gh/api/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-      });
+    const formData = new FormData(e.currentTarget)
 
-      const success = await response.json();
+  await signIn('credentials',{
+  email:formData.get('email'),
+  password:formData.get('password'),
+  callbackUrl:'/dashboard'
+ })
 
-      if (success.responseCode === '002') {
-        setData(success);
-        router.replace('/dashboard'); // Navigate to the dashboard screen on successful login
-      } else {
-        setError('Incorrect email or password'); // Set error message for incorrect login
-      }
-    } catch (error) {
-      console.error('Login error:', error);
-      setError('An error occurred during login'); // Set error message for other errors
-    }
   };
 
   return (
@@ -82,8 +62,7 @@ export default function Example() {
                         name="email"
                         type="email"
                         autoComplete="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                
                         required
                         className="block w-full pl-2 rounded-md border-0 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                       />
@@ -98,8 +77,7 @@ export default function Example() {
                         id="password"
                         name="password"
                         type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
+                   
                         autoComplete="current-password"
                         required
                         className="block w-full rounded-md border-0 pl-2 py-1.5 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -112,7 +90,7 @@ export default function Example() {
                     </a>
                   </div>
                   <div className="flex justify-center items-center p-2 text-red-400">
-                    <p>{error}</p>
+                
                   </div>
                   <div className="">
                     <button
