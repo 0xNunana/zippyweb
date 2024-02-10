@@ -2,7 +2,7 @@
 'use client'
 import React,{useState} from 'react'
 import Image from 'next/image'
-import { useData } from '@/DataContext'
+
 import { OrdersDetailType } from '../lib/definitions'
 import { useSession } from 'next-auth/react';
 
